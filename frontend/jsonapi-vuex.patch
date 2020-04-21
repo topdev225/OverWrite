@@ -1,0 +1,31 @@
+--- ./node_modules/jsonapi-vuex/src/lib.js	1985-10-26 01:15:00.000000000 -0700
++++ ./node_modules/jsonapi-vuex/src/lib_new.js	2020-02-18 17:13:13.000000000 -0800
+@@ -273,6 +273,7 @@
+                 }
+               },
+               enumerable: true,
++              configurable: true,
+             })
+           }
+         }
+--- ./node_modules/jsonapi-vuex/src/actions.js	2020-02-19 00:45:26.000000000 -0800
++++ ./node_modules/jsonapi-vuex/src/actions_new.js	2020-02-19 00:45:20.000000000 -0800
+@@ -205,18 +205,6 @@
+       }
+       merge(apiConf, config)
+       return api(apiConf).then((results) => {
+-        // If the server handed back data, store it
+-        if (results.status === 200 && utils.hasProperty(results.data, 'data')) {
+-          // Full response
+-          context.commit('deleteRecord', data)
+-          data = utils.jsonapiToNorm(results.data.data)
+-          context.commit('addRecords', data)
+-        } else {
+-          // 200 (meta-only), or 204 (no resource) response
+-          // Update the store record from the patch
+-          context.commit('mergeRecords', data)
+-        }
+-
+         // NOTE: We deliberately process included records after any `deleteRecord` mutations
+         // to avoid deleting any included records that we just added.
+         utils.processIncludedRecords(context, results)

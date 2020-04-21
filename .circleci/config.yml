@@ -1,0 +1,99 @@
+version: 2.1
+executors:
+  orderwrite-api:
+    docker:
+      - image: python:3.6-alpine
+        environment:
+          DATABASE_URL: "postgresql://orderwrite@localhost/orderwrite"
+      - image: circleci/postgres:alpine
+        environment:
+          POSTGRES_USER: orderwrite
+          POSTGRES_DB: orderwrite
+      - image: circleci/redis:alpine
+
+commands:
+  build-package:
+    description: "Install dependencies"
+    steps:
+      - checkout
+      - run:
+          name: "Install system dependencies"
+          command: |
+            apk add --no-progress --update bash linux-headers musl-dev postgresql-dev postgresql-client gcc zlib-dev jpeg-dev make
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "api/requirements.txt" }}
+      - run:
+          name: "Install numpy"
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -q -U pip
+            pip install --progress-bar=off numpy
+      - run:
+          name: "Install other Python dependencies"
+          command: |
+            . venv/bin/activate
+            pip install --progress-bar=off -r api/requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "api/requirements.txt" }}
+          paths:
+            - venv
+
+jobs:
+  test-py3:
+    executor: orderwrite-api
+    steps:
+      - build-package
+      - run:
+          name: "Initialize app"
+          command: |
+            . venv/bin/activate
+            cd api
+            bash scripts/init-test.sh
+      - run:
+          name: "Run tests"
+          command: |
+            . venv/bin/activate
+            cd api
+            make test
+  lint:
+    executor: orderwrite-api
+    steps:
+      - build-package
+      - run:
+          name: "Run flake8, black, and pydocstyle"
+          command: |
+            . venv/bin/activate
+            cd api
+            make lint
+  deploy:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "91:41:41:ac:7e:98:d7:09:9f:de:46:24:a8:8e:a8:88"
+      - checkout
+      - run:
+          name: Add SSH fingerprint
+          command: |
+            echo "3.20.209.140 ssh-ed25519 ${PROD_FINGERPRINT}" >> ~/.ssh/known_hosts
+      - run:
+          name: Deploy to Production
+          command: |
+            git remote add prod orderwrite@3.20.209.140:/home/orderwrite/app.git
+            git push prod master
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - test-py3
+      - lint
+      - deploy:
+          requires:
+            - test-py3
+            - lint
+          filters:
+            branches:
+              only: production

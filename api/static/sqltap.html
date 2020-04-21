@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="sqltap profile">
+    <meta name="author" content="inconshreveable">
+
+    <title>SQLTap Profiling Report</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css" rel="stylesheet">
+    <style type="text/css">
+      body { padding-top: 60px; }
+      #query-groups {
+        border-right: 1px solid #ccc;
+      }
+      #total-time { color: #fff; }
+      #total-time .sum { color: #0f0; font-size: 16px; }
+      #total-time .count { color: #0f0; font-size: 16px; }
+      a.toggle { cursor: pointer }
+      a.toggle strong { color: red; }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="https://github.com/inconshreveable/sqltap">sqltap</a>
+          </div>
+          <ul class="navbar-right nav navbar-nav">
+            <li><a target="_blank" href="http://sqltap.inconshreveable.com/">Documentation</a></li>
+            <li><a target="_blank" href="https://github.com/inconshreveable/sqltap">Code</a></li>
+          </ul>
+          <p id="total-time" class="navbar-text">
+            <span class="count">2</span> queries spent
+            <span class="sum">0.01</span> seconds
+            over <span class="sum">0.01</span> seconds of profiling
+          </p>
+          
+        </div>
+      </div>
+      <h1>
+      </h1>
+      <div class="row">
+        <div class="col-xs-3" id="query-groups" style="min-height: 600px">
+
+          <ul class="nav nav-pills nav-stacked" id="myTabs">
+            <li class="active">
+              <a href="#query-0" data-toggle="tab">
+                <span class="label label-default pull-right"
+                      style="margin-right: 5px; width: 8ex; text-align: right;">
+                    1r
+                </span>
+                <span class="label label-warning pull-right" style="margin-right: 5px;">
+                    0.008s
+                </span>
+                <span class="label label-info pull-right" style="margin-right: 5px;">
+                  1q
+                </span>
+SELECT
+              </a>
+            </li>
+            <li class="">
+              <a href="#query-1" data-toggle="tab">
+                <span class="label label-default pull-right"
+                      style="margin-right: 5px; width: 8ex; text-align: right;">
+                    1r
+                </span>
+                <span class="label label-warning pull-right" style="margin-right: 5px;">
+                    0.003s
+                </span>
+                <span class="label label-info pull-right" style="margin-right: 5px;">
+                  1q
+                </span>
+SELECT
+              </a>
+            </li>
+          </ul>
+
+          <hr />
+
+            <div>
+            <span>Report Generated: 2019-01-21 11:16:53</span>
+          </div>
+        </div>
+
+        <!-- ================================================== -->
+
+        <div class="col-xs-9">
+
+          <div class="tab-content">
+            <div id="query-0" class="tab-pane active">
+              <h4 class="toggle">
+                  <ul class="list-inline">
+                    <li>
+                      <dt>Query Count</dt>
+                      <dd>1</dd>
+                    </li>
+                    <li>
+                      <dt>Row Count</dt>
+                      <dd>1</dd>
+                    </li>
+                    <li>
+                      <dt>Total Time</dt>
+                      <dd>0.008</dd>
+                    </li>
+                    <li>
+                      <dt>Mean</dt>
+                      <dd>0.008</dd>
+                    </li>
+                    <li>
+                      <dt>Median</dt>
+                      <dd>0.008</dd>
+                    </li>
+                    <li>
+                      <dt>Min</dt>
+                      <dd>0.008</dd>
+                    </li>
+                    <li>
+                      <dt>Max</dt>
+                      <dd>0.008</dd>
+                    </li>
+                  </ul>
+              </h4>
+
+              <hr />
+              <pre><code class="sql">SELECT tokens.id AS tokens_id,
+       tokens.token AS tokens_token,
+       tokens.token_type AS tokens_token_type,
+       tokens.account_id AS tokens_account_id
+FROM tokens
+WHERE tokens.token = %(token_1)s
+LIMIT %(param_1)s</code></pre>
+              <hr />
+
+              
+              <h4>
+                Query Breakdown
+              </h4>
+              <table class="table">
+                <tr>
+                  <th>Query Time</th>
+                  <th><code>token_1</code></th>
+                  <th><code>param_1</code></th>
+                  <th>Row Count</th>
+                  <th>Params ID</th>
+                </tr>
+                <tr class="">
+                    <td>0.008</td>
+                    <td>d9019b8d-3a4b-4e34-b13a-4810109f236e</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>6</td>
+                </tr>
+              </table>
+
+              <hr />
+              
+              <h4>
+                  1 unique parameter
+                      set is
+                  supplied.
+              </h4>
+              <ul class="details">
+                  <li class="">
+                    <h5>
+                      1
+                      call
+                      (Params ID: 6) with
+                      <tt>
+                        param_1=1, token_1=&#39;d9019b8d-3a4b-4e34-b13a-4810109f236e&#39;
+                      </tt>
+                    </h5>
+                  </li>
+              </ul>
+
+              <hr />
+              
+              <h4>
+                  1 unique
+                      stack issues
+                  this query
+              </h4>
+              <ul class="details">
+                  <li>
+                    <a class="toggle">
+                      <h5>
+                      
+                      1
+                      call from
+                      <strong>wrapper</strong> @/app/src/plugins/auth.py:30
+                      </h5>
+                    </a>
+                    <pre class="trace hidden"><code class="python">File &#34;/usr/local/lib/python3.6/threading.py&#34;, line 884, in _bootstrap
+    self._bootstrap_inner()
+  File &#34;/usr/local/lib/python3.6/threading.py&#34;, line 916, in _bootstrap_inner
+    self.run()
+  File &#34;/usr/local/lib/python3.6/threading.py&#34;, line 864, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;/usr/local/lib/python3.6/socketserver.py&#34;, line 654, in process_request_thread
+    self.finish_request(request, client_address)
+  File &#34;/usr/local/lib/python3.6/socketserver.py&#34;, line 364, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File &#34;/usr/local/lib/python3.6/socketserver.py&#34;, line 724, in __init__
+    self.handle()
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/serving.py&#34;, line 293, in handle
+    rv = BaseHTTPRequestHandler.handle(self)
+  File &#34;/usr/local/lib/python3.6/http/server.py&#34;, line 418, in handle
+    self.handle_one_request()
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/serving.py&#34;, line 328, in handle_one_request
+    return self.run_wsgi()
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/serving.py&#34;, line 270, in run_wsgi
+    execute(self.server.app)
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/serving.py&#34;, line 260, in execute
+    for data in application_iter:
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/debug/__init__.py&#34;, line 288, in debug_application
+    app_iter = self.app(environ, start_response)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/cli.py&#34;, line 324, in __call__
+    return self._app(environ, start_response)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/app.py&#34;, line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/app.py&#34;, line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/app.py&#34;, line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/app.py&#34;, line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask_restplus/api.py&#34;, line 325, in wrapper
+    resp = resource(*args, **kwargs)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/views.py&#34;, line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask_restplus/resource.py&#34;, line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File &#34;/app/src/plugins/auth.py&#34;, line 30, in wrapper
+    token = models.Token.query.filter_by(token=token).first()
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/orm/query.py&#34;, line 2895, in first
+    ret = list(self[0:1])
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/orm/query.py&#34;, line 2687, in __getitem__
+    return list(res)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/orm/query.py&#34;, line 2995, in __iter__
+    return self._execute_and_instances(context)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/orm/query.py&#34;, line 3018, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/engine/base.py&#34;, line 948, in execute
+    return meth(self, multiparams, params)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/sql/elements.py&#34;, line 269, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/engine/base.py&#34;, line 1064, in _execute_clauseelement
+    elem, multiparams, params, ret)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/event/attr.py&#34;, line 284, in __call__
+    fn(*args, **kw)</code></pre>
+                  </li>
+              </ul>
+            </div>
+
+            <!-- ================================================== -->
+
+            <div id="query-1" class="tab-pane ">
+              <h4 class="toggle">
+                  <ul class="list-inline">
+                    <li>
+                      <dt>Query Count</dt>
+                      <dd>1</dd>
+                    </li>
+                    <li>
+                      <dt>Row Count</dt>
+                      <dd>1</dd>
+                    </li>
+                    <li>
+                      <dt>Total Time</dt>
+                      <dd>0.003</dd>
+                    </li>
+                    <li>
+                      <dt>Mean</dt>
+                      <dd>0.003</dd>
+                    </li>
+                    <li>
+                      <dt>Median</dt>
+                      <dd>0.003</dd>
+                    </li>
+                    <li>
+                      <dt>Min</dt>
+                      <dd>0.003</dd>
+                    </li>
+                    <li>
+                      <dt>Max</dt>
+                      <dd>0.003</dd>
+                    </li>
+                  </ul>
+              </h4>
+
+              <hr />
+              <pre><code class="sql">SELECT accounts.id AS accounts_id,
+       accounts.username AS accounts_username,
+       accounts.password AS accounts_password,
+       accounts.email AS accounts_email,
+       accounts.first_name AS accounts_first_name,
+       accounts.last_name AS accounts_last_name,
+       accounts.active AS accounts_active,
+       accounts.basket AS accounts_basket,
+       accounts.role_id AS accounts_role_id,
+       accounts.distributor_id AS accounts_distributor_id,
+       accounts.campaign_id AS accounts_campaign_id
+FROM accounts
+WHERE accounts.id = %(id_1)s
+LIMIT %(param_1)s</code></pre>
+              <hr />
+
+              
+              <h4>
+                Query Breakdown
+              </h4>
+              <table class="table">
+                <tr>
+                  <th>Query Time</th>
+                  <th><code>id_1</code></th>
+                  <th><code>param_1</code></th>
+                  <th>Row Count</th>
+                  <th>Params ID</th>
+                </tr>
+                <tr class="">
+                    <td>0.003</td>
+                    <td>101</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>8</td>
+                </tr>
+              </table>
+
+              <hr />
+              
+              <h4>
+                  1 unique parameter
+                      set is
+                  supplied.
+              </h4>
+              <ul class="details">
+                  <li class="">
+                    <h5>
+                      1
+                      call
+                      (Params ID: 8) with
+                      <tt>
+                        id_1=101, param_1=1
+                      </tt>
+                    </h5>
+                  </li>
+              </ul>
+
+              <hr />
+              
+              <h4>
+                  1 unique
+                      stack issues
+                  this query
+              </h4>
+              <ul class="details">
+                  <li>
+                    <a class="toggle">
+                      <h5>
+                      
+                      1
+                      call from
+                      <strong>wrapper</strong> @/app/src/plugins/auth.py:35
+                      </h5>
+                    </a>
+                    <pre class="trace hidden"><code class="python">File &#34;/usr/local/lib/python3.6/threading.py&#34;, line 884, in _bootstrap
+    self._bootstrap_inner()
+  File &#34;/usr/local/lib/python3.6/threading.py&#34;, line 916, in _bootstrap_inner
+    self.run()
+  File &#34;/usr/local/lib/python3.6/threading.py&#34;, line 864, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;/usr/local/lib/python3.6/socketserver.py&#34;, line 654, in process_request_thread
+    self.finish_request(request, client_address)
+  File &#34;/usr/local/lib/python3.6/socketserver.py&#34;, line 364, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File &#34;/usr/local/lib/python3.6/socketserver.py&#34;, line 724, in __init__
+    self.handle()
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/serving.py&#34;, line 293, in handle
+    rv = BaseHTTPRequestHandler.handle(self)
+  File &#34;/usr/local/lib/python3.6/http/server.py&#34;, line 418, in handle
+    self.handle_one_request()
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/serving.py&#34;, line 328, in handle_one_request
+    return self.run_wsgi()
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/serving.py&#34;, line 270, in run_wsgi
+    execute(self.server.app)
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/serving.py&#34;, line 260, in execute
+    for data in application_iter:
+  File &#34;/usr/local/lib/python3.6/site-packages/werkzeug/debug/__init__.py&#34;, line 288, in debug_application
+    app_iter = self.app(environ, start_response)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/cli.py&#34;, line 324, in __call__
+    return self._app(environ, start_response)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/app.py&#34;, line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/app.py&#34;, line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/app.py&#34;, line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/app.py&#34;, line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask_restplus/api.py&#34;, line 325, in wrapper
+    resp = resource(*args, **kwargs)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask/views.py&#34;, line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File &#34;/usr/local/lib/python3.6/site-packages/flask_restplus/resource.py&#34;, line 44, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File &#34;/app/src/plugins/auth.py&#34;, line 35, in wrapper
+    filter_by(id=token.account_id).\
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/orm/query.py&#34;, line 2895, in first
+    ret = list(self[0:1])
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/orm/query.py&#34;, line 2687, in __getitem__
+    return list(res)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/orm/query.py&#34;, line 2995, in __iter__
+    return self._execute_and_instances(context)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/orm/query.py&#34;, line 3018, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/engine/base.py&#34;, line 948, in execute
+    return meth(self, multiparams, params)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/sql/elements.py&#34;, line 269, in _execute_on_connection
+    return connection._execute_clauseelement(self, multiparams, params)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/engine/base.py&#34;, line 1064, in _execute_clauseelement
+    elem, multiparams, params, ret)
+  File &#34;/usr/local/lib/python3.6/site-packages/sqlalchemy/event/attr.py&#34;, line 284, in __call__
+    fn(*args, **kw)</code></pre>
+                  </li>
+              </ul>
+            </div>
+
+            <!-- ================================================== -->
+
+          </div>
+        </div>
+    </div><!-- /.container -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            $(".toggle").click(function() {
+                $(this).siblings(".trace").toggleClass("hidden");
+            });
+            $('#myTabs a').click(function (e) {
+                $(this).tab('show');
+                e.preventDefault();
+            });
+            $(".morequeries").click(function(e) {
+                e.preventDefault();
+                $(this).hide();
+                $(this).prev("table").find("tr.hidden").removeClass("hidden");
+            });
+            $(".moreparams").click(function(e) {
+                e.preventDefault();
+                $(this).hide();
+                $(this).prev("ul").find("li.hidden").removeClass("hidden");
+            });
+        });
+    </script>
+  </body>
+</html>

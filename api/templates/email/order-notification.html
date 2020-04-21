@@ -1,0 +1,52 @@
+{% extends "email/plain-text.html" %}
+
+
+{% block content %}
+
+{% if order.fullname %}
+    <p>New order from {{ order.checkout_fields.get('First Name') + ' ' + order.checkout_fields.get('Last Name') }}</p>
+{% else %}
+    <p>New order</p>
+{% endif %}
+
+<table class="order-table align-center">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th>Size</th>
+			<th>Price</th>
+			<th>Quantity</th>
+			<th>Total</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for item in order.order_items %}
+		<tr>
+			<td>
+				<img width="50px" heigth="50px "src="`{{ basketImgs[item.product_variant.id] }}`" alt="">
+			</td>
+			<td>
+				{{ item.product_variant.product.name }}
+			</td>
+			<td>
+				{{ basketSizes[item.product_variant.id] }}
+			</td>
+			<td>
+				${{ item.product_variant.price }}
+			</td>
+			<td>
+				{{ item.quantity }}
+			</td>
+			<td>
+				${{ '%0.2f' | format(item.product_variant.price*item.quantity|float) }}
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<h2 class="align-right mt3 mb3">
+	Total ${{order.total}} 
+</h2>
+
+{% endblock %}

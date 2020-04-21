@@ -1,0 +1,53 @@
+version: '3.0'
+services:
+  postgres:
+    image: 'postgres:11-alpine'
+    container_name: orderwrite-postgres
+    ports:
+      - '60699:5432'
+    environment:
+      POSTGRES_DB: orderwrite
+      POSTGRES_USER: orderwrite
+      POSTGRES_PASSWORD: null
+  redis:
+    image: 'redis:alpine'
+    container_name: orderwrite-redis
+  wiki:
+    build: ./wiki/
+    container_name: orderwrite-wiki
+    volumes:
+      - './wiki:/wiki'
+    ports:
+      - '60600:8080'
+    command: vuepress dev
+  api:
+    build: ./api/
+    container_name: orderwrite-python-api
+    volumes:
+      - './api:/app'
+    depends_on:
+      - postgres
+      - celery
+    ports:
+      - '60601:5000'
+    environment:
+      - FLASK_ENV=development
+    command: bash scripts/start-local.sh
+  celery:
+    build: ./api/
+    container_name: orderwrite-celery
+    volumes:
+      - './api:/app'
+    depends_on:
+      - redis
+    environment:
+      - FLASK_ENV=development
+    command: bash -c "rm -rf celerybeat* & celery worker -A app.celery_app --loglevel=info --concurrency=4 & celery beat -A app.celery_app --loglevel=info"
+  web:
+    build: ./frontend/
+    container_name: orderwrite-web
+    volumes:
+      - './frontend:/app'
+    ports:
+      - '60602:60602'
+    command: sh scripts/start-local.sh

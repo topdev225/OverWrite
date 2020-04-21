@@ -40,7 +40,7 @@ sqlalchemy-filters==0.8.0
 sqlparse==0.2.4
 sqltap==0.3.10
 vine==1.1.4
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 wrapt==1.10.11
 reportlab==3.5.26
 Pillow==4.0.0
